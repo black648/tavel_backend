@@ -1,5 +1,6 @@
 package com.travel.domain.city.dto;
 
+import com.travel.domain.city.domain.City;
 import com.travel.domain.city.domain.CityCategory;
 import lombok.Builder;
 import lombok.Getter;
@@ -17,5 +18,13 @@ public class CityDto {
         this.id = id;
         this.name = name;
         this.category = category;
+    }
+
+    public static CityDto of(City city) {
+        return new CityDto(
+                city.getId(),
+                city.getName(),
+                city.getCategory()
+        );
     }
 }

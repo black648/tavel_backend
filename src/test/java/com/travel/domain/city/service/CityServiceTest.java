@@ -3,10 +3,11 @@ package com.travel.domain.city.service;
 import com.travel.domain.city.domain.City;
 import com.travel.domain.city.domain.CityCategory;
 import com.travel.domain.city.domain.CityRepository;
-import com.travel.domain.city.dto.CitySaveRequestDto;
 import com.travel.domain.city.dto.CityDto;
+import com.travel.domain.city.dto.CitySaveRequestDto;
 import com.travel.domain.travel.dto.city.TravelCityDto;
 import com.travel.domain.travel.service.TravelCityService;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,10 @@ class CityServiceTest {
     @Autowired
     CityRepository cityRepository;
 
+    @AfterEach
+    public void clean() {
+        cityRepository.deleteAll();
+    }
 
     @DisplayName("[단위테스트] 도시명 등록")
     @Test
@@ -80,6 +85,23 @@ class CityServiceTest {
         //then
         List<City> cityList = cityRepository.findAll();
         assertThat(cityList.size()).isEqualTo(1);
+    }
+
+    @DisplayName("[단위테스트] 단일 도시 조회 ")
+    @Test
+    public void get() {
+        //given
+        Long saveCity = cityService.save(CitySaveRequestDto.builder()
+                .name("서울")
+                .category(CityCategory.SEOUL)
+                .build());
+
+        //when
+        CityDto cityDto = cityService.get(saveCity);
+
+        //then
+        assertThat(cityDto.getName()).isEqualTo("서울");
+        assertThat(cityDto.getCategory()).isEqualTo(CityCategory.SEOUL);
     }
 
     private void checkSelectCityData(String name, CityCategory category) {

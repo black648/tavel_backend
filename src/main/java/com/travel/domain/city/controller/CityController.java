@@ -21,9 +21,13 @@ public class CityController {
         cityService.update(cityDto);
     }
 
-    @DeleteMapping("/city/delete")
+    @DeleteMapping("/city/delete/{id}")
     public void delete(@PathVariable Long id) {
-
+        cityService.delete(id);
     }
 
+    @PostMapping("/city/get/{id}")
+    public CityDto get(@PathVariable Long id) {
+        return cityService.get(id);
+    }
 }

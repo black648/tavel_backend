@@ -4,8 +4,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.travel.domain.city.domain.City;
 import com.travel.domain.city.domain.CityCategory;
 import com.travel.domain.city.domain.CityRepository;
-import com.travel.domain.city.dto.CitySaveRequestDto;
 import com.travel.domain.city.dto.CityDto;
+import com.travel.domain.city.dto.CitySaveRequestDto;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -32,6 +33,11 @@ public class CityControllerTest {
 
     @Autowired
     private MockMvc mvc;
+
+    @AfterEach
+    public void clean() {
+        cityRepository.deleteAll();
+    }
 
     @DisplayName("[API테스트] 도시 등록")
     @Test
@@ -71,6 +77,26 @@ public class CityControllerTest {
 
         //then
         checkSelectCityData("광주", CityCategory.GYEONGGI);
+    }
+
+    @DisplayName("[API테스트] 도시 수정")
+    @Test
+    public void get() throws Exception {
+        //given
+        City saveCity = cityRepository.save(City.builder()
+                .name("원주")
+                .category(CityCategory.GANGWON)
+                .build());
+
+        //when
+        mvc.perform(post("/city/get/{id}", saveCity.getId())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(new ObjectMapper().writeValueAsString(
+                                saveCity.getId())))
+                .andExpect(status().isOk());
+
+        //then
+        checkSelectCityData("원주", CityCategory.GANGWON);
     }
 
     private void checkSelectCityData(String name, CityCategory category) {

@@ -39,4 +39,9 @@ public class CityService {
             cityRepository.delete(city);
         }
     }
+
+    public CityDto get(Long id) {
+        return CityDto.of(cityRepository.findById(id).orElseThrow(() ->
+                new IllegalArgumentException("요청한 도시가 존재하지 않습니다.")));
+    }
 }
