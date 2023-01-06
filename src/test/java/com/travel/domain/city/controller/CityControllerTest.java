@@ -5,7 +5,7 @@ import com.travel.domain.city.domain.City;
 import com.travel.domain.city.domain.CityCategory;
 import com.travel.domain.city.domain.CityRepository;
 import com.travel.domain.city.dto.CityDto;
-import com.travel.domain.city.dto.CitySaveRequestDto;
+import com.travel.domain.city.dto.CitySaveDto;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -45,7 +45,7 @@ public class CityControllerTest {
         mvc.perform(post("/city/save")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(new ObjectMapper().writeValueAsString(
-                                CitySaveRequestDto.builder()
+                                CitySaveDto.builder()
                                     .name("서울")
                                     .category(CityCategory.SEOUL)
                                     .build())))

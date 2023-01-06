@@ -8,12 +8,12 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-public class CitySaveRequestDto {
+public class CitySaveDto {
     private String name;
     private CityCategory category;
 
     @Builder
-    public CitySaveRequestDto(String name, CityCategory category) {
+    public CitySaveDto(String name, CityCategory category) {
         this.name = name;
         this.category = category;
     }

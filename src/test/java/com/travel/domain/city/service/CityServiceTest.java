@@ -4,7 +4,7 @@ import com.travel.domain.city.domain.City;
 import com.travel.domain.city.domain.CityCategory;
 import com.travel.domain.city.domain.CityRepository;
 import com.travel.domain.city.dto.CityDto;
-import com.travel.domain.city.dto.CitySaveRequestDto;
+import com.travel.domain.city.dto.CitySaveDto;
 import com.travel.domain.travel.dto.city.TravelCityDto;
 import com.travel.domain.travel.service.TravelCityService;
 import org.junit.jupiter.api.AfterEach;
@@ -37,7 +37,7 @@ class CityServiceTest {
     @Test
     public void save() {
         //given
-        cityService.save(CitySaveRequestDto.builder()
+        cityService.save(CitySaveDto.builder()
                 .name("서울")
                 .category(CityCategory.SEOUL)
                 .build());
@@ -50,7 +50,7 @@ class CityServiceTest {
     @Test
     public void update() {
         //given
-        Long saveCity = cityService.save(CitySaveRequestDto.builder()
+        Long saveCity = cityService.save(CitySaveDto.builder()
                 .name("서울")
                 .category(CityCategory.SEOUL)
                 .build());
@@ -70,7 +70,7 @@ class CityServiceTest {
     @Test
     public void delete() {
         //given
-        Long saveCity = cityService.save(CitySaveRequestDto.builder()
+        Long saveCity = cityService.save(CitySaveDto.builder()
                 .name("서울")
                 .category(CityCategory.SEOUL)
                 .build());
@@ -91,7 +91,7 @@ class CityServiceTest {
     @Test
     public void get() {
         //given
-        Long saveCity = cityService.save(CitySaveRequestDto.builder()
+        Long saveCity = cityService.save(CitySaveDto.builder()
                 .name("서울")
                 .category(CityCategory.SEOUL)
                 .build());

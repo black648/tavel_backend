@@ -1,6 +1,6 @@
 package com.travel.domain.city.controller;
 
-import com.travel.domain.city.dto.CitySaveRequestDto;
+import com.travel.domain.city.dto.CitySaveDto;
 import com.travel.domain.city.dto.CityDto;
 import com.travel.domain.city.service.CityService;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +12,7 @@ public class CityController {
     private final CityService cityService;
 
     @PostMapping("/city/save")
-    public Long save(@RequestBody CitySaveRequestDto requestDto) {
+    public Long save(@RequestBody CitySaveDto requestDto) {
         return cityService.save(requestDto);
     }
 
