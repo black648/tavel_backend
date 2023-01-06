@@ -4,7 +4,6 @@ import com.travel.domain.travel.domain.Travel;
 import com.travel.domain.travel.domain.TravelRepository;
 import com.travel.domain.travel.dto.TravelSaveDto;
 import com.travel.domain.travel.dto.TravelUpdateDto;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +45,7 @@ public class TravelServiceTest {
         assertThat(list.get(0).getName()).isEqualTo("대구여행 렛츠 고");
     }
 
-    @DisplayName("[단위테스트] 도시명 수정")
+    @DisplayName("[단위테스트] 여행 수정")
     @Test
     public void update() {
         //given
@@ -66,6 +65,25 @@ public class TravelServiceTest {
 
         //then
         checkSelectCityData("전주여행 렛츠 고", "20221230", "20230102");
+    }
+
+    @DisplayName("[단위테스트] 여행 삭제 ")
+    @Test
+    public void delete() {
+        //given
+        Long saveCity = travelService.save(TravelSaveDto.builder()
+                .name("대구여행 렛츠 고")
+                .userId("gogogo")
+                .travelStartDate("20221229")
+                .travelEndDate("20230101")
+                .build());
+
+        //when
+        travelService.delete(saveCity);
+
+        //then
+        List<Travel> travelList = travelRepository.findAll();
+        assertThat(travelList.size()).isEqualTo(0);
     }
 
     private void checkSelectCityData(String name, String travelStartDate, String travelEndDate) {

@@ -20,4 +20,9 @@ public class TravelController {
     public void update(@PathVariable Long id, @RequestBody TravelUpdateDto travelUpdateDto) {
         travelService.update(id, travelUpdateDto);
     }
+
+    @DeleteMapping("/travel/delete/{id}")
+    public void delete(@PathVariable Long id) {
+        travelService.delete(id);
+    }
 }

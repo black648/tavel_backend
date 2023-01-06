@@ -26,4 +26,17 @@ public class TravelService {
 
         travel.update(travelUpdateDto);
     }
+
+    @Transactional
+    public void delete(Long id) {
+        Travel travel = travelRepository.findById(id).orElseThrow(() ->
+                new IllegalArgumentException("요청한 여행이 존재하지 않습니다."));
+
+        //여행도시 삭제
+
+        //여행계획 삭제
+
+        //여행삭제
+        travelRepository.delete(travel);
+    }
 }
