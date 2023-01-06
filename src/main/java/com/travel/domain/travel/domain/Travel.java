@@ -1,7 +1,7 @@
 package com.travel.domain.travel.domain;
 
 import com.travel.domain.travel.domain.plan.TravelPlan;
-import com.travel.domain.travel.dto.TravelDto;
+import com.travel.domain.travel.dto.TravelUpdateDto;
 import com.travel.global.base.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Builder;
@@ -43,10 +43,9 @@ public class Travel extends BaseEntity {
         this.travelEndDate = travelEndDate;
     }
 
-    public void update(TravelDto travelDto) {
-        this.name = travelDto.getName();
-        this.userId = travelDto.getUserId();
-        this.travelStartDate = travelDto.getTravelStartDate();
-        this.travelEndDate = travelDto.getTravelEndDate();
+    public void update(TravelUpdateDto travelUpdateDto) {
+        this.name = travelUpdateDto.getName();
+        this.travelStartDate = travelUpdateDto.getTravelStartDate();
+        this.travelEndDate = travelUpdateDto.getTravelEndDate();
     }
 }
