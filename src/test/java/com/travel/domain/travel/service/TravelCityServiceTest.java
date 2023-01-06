@@ -3,6 +3,7 @@ package com.travel.domain.travel.service;
 import com.travel.domain.travel.domain.city.TravelCity;
 import com.travel.domain.travel.domain.city.TravelCityRepository;
 import com.travel.domain.travel.dto.city.TravelCityDto;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,11 @@ public class TravelCityServiceTest {
 
     @Autowired
     TravelCityRepository travelCityRepository;
+
+    @AfterEach
+    public void clean() {
+        travelCityRepository.deleteAll();
+    }
 
     @DisplayName("[단위테스트] 도시명 등록")
     @Test
