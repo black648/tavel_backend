@@ -25,7 +25,6 @@ public class TravelCity extends BaseEntity {
 
     @Builder
     public TravelCity(Long cityId) {
-
         this.cityId = cityId;
     }
 
