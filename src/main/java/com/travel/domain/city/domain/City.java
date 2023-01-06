@@ -1,6 +1,6 @@
 package com.travel.domain.city.domain;
 
-import com.travel.domain.city.dto.request.CityUpdateRequestDto;
+import com.travel.domain.city.dto.CityDto;
 import com.travel.global.base.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Builder;
@@ -29,9 +29,9 @@ public class City extends BaseEntity {
         this.category = category;
     }
 
-    public void update(CityUpdateRequestDto requestDto) {
-        this.name = requestDto.getName();
-        this.category = requestDto.getCategory();
+    public void update(CityDto cityDto) {
+        this.name = cityDto.getName();
+        this.category = cityDto.getCategory();
     }
 
 }

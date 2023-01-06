@@ -4,8 +4,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.travel.domain.city.domain.City;
 import com.travel.domain.city.domain.CityCategory;
 import com.travel.domain.city.domain.CityRepository;
-import com.travel.domain.city.dto.request.CitySaveRequestDto;
-import com.travel.domain.city.dto.request.CityUpdateRequestDto;
+import com.travel.domain.city.dto.CitySaveRequestDto;
+import com.travel.domain.city.dto.CityDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -62,7 +62,7 @@ public class CityControllerTest {
         mvc.perform(put("/city/update")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(new ObjectMapper().writeValueAsString(
-                                CityUpdateRequestDto.builder()
+                                CityDto.builder()
                                         .id(saveCity.getId())
                                         .name("광주")
                                         .category(CityCategory.GYEONGGI)
