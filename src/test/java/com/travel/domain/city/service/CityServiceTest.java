@@ -5,6 +5,7 @@ import com.travel.domain.city.domain.CityCategory;
 import com.travel.domain.city.domain.CityRepository;
 import com.travel.domain.city.dto.CityDto;
 import com.travel.domain.city.dto.CitySaveDto;
+import com.travel.domain.city.dto.CityUpdateDto;
 import com.travel.domain.travel.dto.city.TravelCityDto;
 import com.travel.domain.travel.service.TravelCityService;
 import org.junit.jupiter.api.AfterEach;
@@ -56,8 +57,7 @@ class CityServiceTest {
                 .build());
 
         //when
-        cityService.update(CityDto.builder()
-                .id(saveCity)
+        cityService.update(saveCity, CityUpdateDto.builder()
                 .name("성남")
                 .category(CityCategory.GYEONGGI)
                 .build());

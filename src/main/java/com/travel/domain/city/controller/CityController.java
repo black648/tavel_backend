@@ -2,6 +2,7 @@ package com.travel.domain.city.controller;
 
 import com.travel.domain.city.dto.CitySaveDto;
 import com.travel.domain.city.dto.CityDto;
+import com.travel.domain.city.dto.CityUpdateDto;
 import com.travel.domain.city.service.CityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -16,9 +17,9 @@ public class CityController {
         return cityService.save(requestDto);
     }
 
-    @PutMapping("/city/update")
-    public void update(@RequestBody CityDto cityDto) {
-        cityService.update(cityDto);
+    @PutMapping("/city/update/{id}")
+    public void update(@PathVariable Long id, @RequestBody CityUpdateDto cityUpdateDto) {
+        cityService.update(id, cityUpdateDto);
     }
 
     @DeleteMapping("/city/delete/{id}")

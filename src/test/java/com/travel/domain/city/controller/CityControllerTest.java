@@ -65,11 +65,10 @@ public class CityControllerTest {
                 .build());
 
         //when
-        mvc.perform(put("/city/update")
+        mvc.perform(put("/city/update/{id}", saveCity.getId())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(new ObjectMapper().writeValueAsString(
                                 CityDto.builder()
-                                        .id(saveCity.getId())
                                         .name("광주")
                                         .category(CityCategory.GYEONGGI)
                                         .build())))

@@ -6,6 +6,7 @@ import com.travel.domain.city.domain.log.CityLog;
 import com.travel.domain.city.domain.log.CityLogRepository;
 import com.travel.domain.city.dto.CityDto;
 import com.travel.domain.city.dto.CitySaveDto;
+import com.travel.domain.city.dto.CityUpdateDto;
 import com.travel.domain.travel.service.TravelCityService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -26,11 +27,11 @@ public class CityService {
     }
 
     @Transactional
-    public void update(CityDto cityDto) {
-        City city = cityRepository.findById(cityDto.getId()).orElseThrow(() ->
+    public void update(Long id, CityUpdateDto cityUpdateDto) {
+        City city = cityRepository.findById(id).orElseThrow(() ->
             new IllegalArgumentException("요청한 도시가 존재하지 않습니다."));
 
-        city.update(cityDto);
+        city.update(cityUpdateDto);
     }
 
     @Transactional
