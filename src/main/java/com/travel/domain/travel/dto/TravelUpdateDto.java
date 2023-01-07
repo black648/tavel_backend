@@ -1,6 +1,5 @@
 package com.travel.domain.travel.dto;
 
-import com.travel.domain.travel.domain.Travel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

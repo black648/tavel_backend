@@ -36,7 +36,8 @@ public class Travel extends BaseEntity {
     private String travelEndDate;
 
     @Builder
-    public Travel(String name, String userId, String travelStartDate, String travelEndDate) {
+    public Travel(Long id, String name, String userId, String travelStartDate, String travelEndDate) {
+        this.id = id;
         this.name = name;
         this.userId = userId;
         this.travelStartDate = travelStartDate;
