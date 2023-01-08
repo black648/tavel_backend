@@ -1,6 +1,7 @@
 package com.travel.domain.travel.service;
 
 import com.travel.domain.travel.domain.city.TravelCity;
+import com.travel.domain.travel.domain.city.TravelCityQueryDslRepository;
 import com.travel.domain.travel.domain.city.TravelCityRepository;
 import com.travel.domain.travel.dto.city.TravelCityDto;
 import jakarta.transaction.Transactional;
@@ -13,16 +14,34 @@ import java.util.List;
 @Service
 public class TravelCityService {
     private final TravelCityRepository travelCityRepository;
+    private final TravelCityQueryDslRepository travelCityQueryDslRepository;
 
     @Transactional
     public Long save(TravelCityDto requestDto) {
         return travelCityRepository.save(requestDto.toEntity()).getId();
     }
 
-    // TODO: 2023/01/06 삭제 로직 구현 필요
+    @Transactional
+    public void update(Long id, Long cityId) {
+        TravelCity travelCity = travelCityRepository.findById(id).orElseThrow(() ->
+            new IllegalArgumentException("요청한 도시의 여행정보가 존재하지 않습니다."));
 
-    public List<TravelCity> findByTravelId(Long travelId) {
-        return travelCityRepository.findByTravelId(travelId);
+        travelCity.update(cityId);
+    }
+
+    @Transactional
+    public void delete(Long id) {
+        TravelCity travelCity = travelCityRepository.findById(id).orElseThrow(() ->
+                new IllegalArgumentException("요청한 도시의 여행정보가 존재하지 않습니다."));
+
+        travelCityRepository.delete(travelCity);
+    }
+
+    @Transactional
+    public void deleteAllToTravelId(Long travelId) {
+        if(travelCityRepository.findByTravelId(travelId).size() > 0) {
+            travelCityQueryDslRepository.deleteAllToTravelId(travelId);
+        }
     }
 
     public List<TravelCity> findByCityId(Long cityId) {

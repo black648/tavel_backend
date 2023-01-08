@@ -18,17 +18,26 @@ public class TravelCity extends BaseEntity {
     private Long id;
 
     @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name = "travelId", insertable = false, updatable = false)
     private Travel travel;
+
+    @Column(name = "travelId")
+    private Long travelId;
 
     @Column
     private Long cityId;
 
+    @Column
+    private int orderNo;
+
     @Builder
-    public TravelCity(Long cityId) {
+    public TravelCity(Long travelId, Long cityId, int orderNo) {
+        this.travelId = travelId;
         this.cityId = cityId;
+        this.orderNo = orderNo;
     }
 
-    public void update(TravelCityDto travelCityDto) {
-        this.cityId = travelCityDto.getCityId();
+    public void update(Long cityId) {
+        this.cityId = cityId;
     }
 }

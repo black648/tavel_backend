@@ -18,7 +18,10 @@ public class TravelController {
 
     @PutMapping("/travel/update/{id}")
     public void update(@PathVariable Long id, @RequestBody TravelUpdateDto travelUpdateDto) {
-        travelService.update(id, travelUpdateDto);
+        try {
+            travelService.update(id, travelUpdateDto);
+        } catch (Exception e) {
+        }
     }
 
     @DeleteMapping("/travel/delete/{id}")

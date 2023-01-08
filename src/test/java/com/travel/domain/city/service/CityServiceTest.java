@@ -29,18 +29,18 @@ class CityServiceTest {
     @Autowired
     CityRepository cityRepository;
 
-    @AfterEach
-    public void clean() {
-        cityRepository.deleteAll();
-    }
+//    @AfterEach
+//    public void clean() {
+//        cityRepository.deleteAll();
+//    }
 
     @DisplayName("[단위테스트] 도시명 등록")
     @Test
     public void save() {
         //given
         cityService.save(CitySaveDto.builder()
-                .name("서울")
-                .category(CityCategory.SEOUL)
+                .name("제천")
+                .category(CityCategory.CHUNGCHEONG)
                 .build());
 
         //when & then

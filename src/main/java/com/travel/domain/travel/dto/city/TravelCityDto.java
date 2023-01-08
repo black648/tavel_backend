@@ -19,6 +19,7 @@ public class TravelCityDto {
 
     public TravelCity toEntity() {
         return TravelCity.builder()
+                .travelId(travelId)
                 .cityId(cityId)
                 .build();
     }
