@@ -1,5 +1,6 @@
 package com.travel.domain.travel.domain;
 
+import com.travel.domain.travel.domain.city.TravelCity;
 import com.travel.domain.travel.domain.plan.TravelPlan;
 import com.travel.domain.travel.dto.TravelUpdateDto;
 import com.travel.global.base.BaseEntity;
@@ -22,6 +23,9 @@ public class Travel extends BaseEntity {
 
     @OneToMany(mappedBy = "travel", cascade = CascadeType.ALL, orphanRemoval = true)
     private final List<TravelPlan> travelPlans = new ArrayList<>();
+
+    @OneToMany(mappedBy = "travel", cascade = CascadeType.ALL, orphanRemoval = true)
+    private final List<TravelCity> travelCityList = new ArrayList<>();
 
     @Column
     private String name;

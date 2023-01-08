@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Getter
 public class TravelUpdateDto {
+    private Long id;
     private String name;
     private String travelStartDate;
     private String travelEndDate;

@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Getter
 public class TravelDto {
-    private Long id;
     private String name;
     private String userId;
     private String travelStartDate;
@@ -16,7 +15,6 @@ public class TravelDto {
 
     @Builder
     public TravelDto(Long id, String name, String userId, String travelStartDate, String travelEndDate) {
-        this.id = id;
         this.name = name;
         this.userId = userId;
         this.travelStartDate = travelStartDate;
