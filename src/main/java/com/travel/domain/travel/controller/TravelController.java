@@ -1,5 +1,7 @@
 package com.travel.domain.travel.controller;
 
+import com.travel.domain.travel.dto.TravelRequestDto;
+import com.travel.domain.travel.dto.TravelResponseDto;
 import com.travel.domain.travel.dto.TravelSaveDto;
 import com.travel.domain.travel.dto.TravelUpdateDto;
 import com.travel.domain.travel.service.TravelService;
@@ -27,5 +29,10 @@ public class TravelController {
     @DeleteMapping("/travel/delete/{id}")
     public void delete(@PathVariable Long id) {
         travelService.delete(id);
+    }
+
+    @PostMapping("/travel/get")
+    public TravelResponseDto get(@RequestBody TravelRequestDto requestDto) {
+        return travelService.get(requestDto);
     }
 }

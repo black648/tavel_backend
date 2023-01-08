@@ -22,7 +22,7 @@ public class Travel extends BaseEntity {
     private Long id;
 
     @OneToMany(mappedBy = "travel", cascade = CascadeType.ALL, orphanRemoval = true)
-    private final List<TravelPlan> travelPlans = new ArrayList<>();
+    private final List<TravelPlan> travelPlanList = new ArrayList<>();
 
     @OneToMany(mappedBy = "travel", cascade = CascadeType.ALL, orphanRemoval = true)
     private final List<TravelCity> travelCityList = new ArrayList<>();

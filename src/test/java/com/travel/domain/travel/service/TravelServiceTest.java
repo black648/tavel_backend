@@ -85,4 +85,6 @@ public class TravelServiceTest {
         List<Travel> travelList = travelRepository.findAll();
         assertThat(travelList.size()).isEqualTo(0);
     }
+
+
 }

@@ -1,10 +1,10 @@
 package com.travel.domain.travel.service;
 
 import com.travel.domain.travel.domain.Travel;
+import com.travel.domain.travel.domain.TravelQueryDslRepository;
 import com.travel.domain.travel.domain.TravelRepository;
 import com.travel.domain.travel.domain.plan.TravelPlanRepository;
-import com.travel.domain.travel.dto.TravelSaveDto;
-import com.travel.domain.travel.dto.TravelUpdateDto;
+import com.travel.domain.travel.dto.*;
 import com.travel.domain.travel.dto.plan.TravelPlanUpdateDto;
 import com.travel.global.util.DateUtil;
 import jakarta.transaction.Transactional;
@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class TravelService {
     private final TravelRepository travelRepository;
+    private final TravelQueryDslRepository travelQueryDslRepository;
     private final TravelPlanService travelPlanService;
     private final TravelCityService travelCityService;
 
@@ -84,4 +85,20 @@ public class TravelService {
         travelRepository.delete(travel);
     }
 
+    public TravelResponseDto get(TravelRequestDto requestDto) {
+        TravelSearchType searchType = requestDto.getSearchType() == null
+                ? TravelSearchType.NORMAL: requestDto.getSearchType();
+
+        TravelResponseDto travelResponseDto;
+        switch (searchType) {
+            //단일 여행 건 조회 (여행계획 포함)
+            case PLAN -> travelResponseDto = new TravelResponseDto(travelQueryDslRepository.getIncludePlan(requestDto));
+            //단일 여행 건 조회 (여행도시 포함)
+            case CITY -> travelResponseDto = new TravelResponseDto(travelQueryDslRepository.getIncludeCity(requestDto));
+            //단일 여행 Join(X)
+            default -> travelResponseDto = new TravelResponseDto(travelQueryDslRepository.get(requestDto));
+        }
+
+        return travelResponseDto;
+    }
 }
