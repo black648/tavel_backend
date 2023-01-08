@@ -22,11 +22,11 @@ public class TravelPlanController {
     }
 
     @PutMapping("/travelPlan/saveAll")
-    public void update(@RequestBody List<TravelPlanSaveDto> travelPlanSaveDtoList) {
+    public void saveAll(@RequestBody List<TravelPlanSaveDto> travelPlanSaveDtoList) {
         travelPlanService.saveAll(travelPlanSaveDtoList);
     }
 
-    @PostMapping("/travelPlan/get")
+    @PostMapping("/travelPlan/getList")
     public List<TravelPlanDto> getList(@RequestBody TravelPlanDto travelPlanDto) {
         return travelPlanService.getList(travelPlanDto);
     }

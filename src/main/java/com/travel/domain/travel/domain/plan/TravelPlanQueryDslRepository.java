@@ -1,9 +1,9 @@
 package com.travel.domain.travel.domain.plan;
 
-import com.querydsl.core.types.Expression;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.travel.domain.travel.dto.plan.TravelPlanDto;
+import com.travel.domain.travel.dto.plan.TravelPlanUpdateDto;
 import com.travel.global.util.RepositoryUtil;
 import jakarta.persistence.EntityManager;
 import org.springframework.stereotype.Repository;
@@ -18,6 +18,25 @@ public class TravelPlanQueryDslRepository {
 
     public TravelPlanQueryDslRepository(EntityManager em) {
         this.queryFactory = new JPAQueryFactory(em);
+    }
+
+    public Long updateTravelDate(TravelPlanUpdateDto updateDto) {
+        return queryFactory.update(travelPlan)
+                .where(travelPlan.travelId.eq(updateDto.getTravelId()),
+                       travelPlan.travelDate.between(updateDto.getBeforeDate(), updateDto.getAfterDate()))
+                .set(travelPlan.travelDate, updateDto.getTravelDate())
+                .execute();
+    }
+
+    public Long updateOrder(Long travelId, String travelDate, Long addCount) {
+        return queryFactory.update(travelPlan)
+                .where(travelPlan.travelId.eq(travelId), travelPlan.travelDate.eq(travelDate))
+                .set(travelPlan.orderNo, travelPlan.orderNo.add(addCount))
+                .execute();
+    }
+
+    public void deleteAllToTravelId(Long travelId) {
+        queryFactory.delete(travelPlan).where(travelPlan.travelId.eq(travelId)).execute();
     }
 
     public List<TravelPlanDto> getList(TravelPlanDto travelPlanDto) {

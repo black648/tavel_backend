@@ -5,6 +5,7 @@ import com.travel.domain.travel.domain.plan.TravelPlanQueryDslRepository;
 import com.travel.domain.travel.domain.plan.TravelPlanRepository;
 import com.travel.domain.travel.dto.plan.TravelPlanDto;
 import com.travel.domain.travel.dto.plan.TravelPlanSaveDto;
+import com.travel.domain.travel.dto.plan.TravelPlanUpdateDto;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -31,6 +32,7 @@ public class TravelPlanService {
         return travelPlanRepository.save(travelPlanSaveDto.toEntity()).getId();
     }
 
+    //일괄 삭제 후 등록
     @Transactional
     public void saveAll(List<TravelPlanSaveDto> travelPlanSaveDtoList) {
         //delete
@@ -44,7 +46,26 @@ public class TravelPlanService {
         travelPlanRepository.saveAll(travelPlanSaveDtoList.stream()
                 .map(TravelPlanSaveDto::toEntity)
                 .collect(Collectors.toList()));
+    }
 
+    //여행일정 변경
+    @Transactional
+    public Long updateTravelDate(TravelPlanUpdateDto updateDto) {
+        return travelPlanQueryDslRepository.updateTravelDate(updateDto);
+    }
+
+    //orderNo 재조정
+    @Transactional
+    public Long updateOrder(Long travelId, String travelDate, Long addCount) {
+        return travelPlanQueryDslRepository.updateOrder(travelId, travelDate, addCount);
+    }
+
+    //travelId로 등록된 여행일정들 삭제
+    @Transactional
+    public void deleteAllToTravelId(Long travelId) {
+        if (travelPlanRepository.findByTravelId(travelId).size() > 0) {
+            travelPlanQueryDslRepository.deleteAllToTravelId(travelId);
+        }
     }
 
     public List<TravelPlanDto> getList(TravelPlanDto travelPlanDto) {
