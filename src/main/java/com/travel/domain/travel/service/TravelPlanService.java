@@ -39,9 +39,6 @@ public class TravelPlanService {
         travelPlanRepository.deleteAllByTravelIdAndTravelDate(
                 travelPlanSaveDtoList.get(0).getTravelId(), travelPlanSaveDtoList.get(0).getTravelDate());
 
-        //데이터 반영
-        travelPlanRepository.flush();
-
         //해당일 일정 일괄 save
         travelPlanRepository.saveAll(travelPlanSaveDtoList.stream()
                 .map(TravelPlanSaveDto::toEntity)
