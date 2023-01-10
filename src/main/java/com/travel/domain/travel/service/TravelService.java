@@ -7,6 +7,7 @@ import com.travel.domain.travel.domain.plan.TravelPlanRepository;
 import com.travel.domain.travel.dto.*;
 import com.travel.domain.travel.dto.plan.TravelPlanUpdateDto;
 import com.travel.global.util.DateUtil;
+import com.travel.global.util.MessageUtil;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -29,7 +30,7 @@ public class TravelService {
     @Transactional
     public void update(Long id, TravelUpdateDto travelUpdateDto) throws Exception {
         Travel travel = travelRepository.findById(id).orElseThrow(() ->
-                new IllegalArgumentException("요청한 여행이 존재하지 않습니다."));
+                new IllegalArgumentException(MessageUtil.getMessage("cannot.find.travel")));
         try {
             //등록된 일정의 시작일보다 신규 일정의 시작일이 늦춰졌을 때
             if(DateUtil.compareTo(travelUpdateDto.getTravelStartDate(), travel.getTravelStartDate())) {
@@ -66,14 +67,14 @@ public class TravelService {
             }
             travel.update(travelUpdateDto);
         } catch (Exception e) {
-            throw new Exception("여행 수정에 실패하였습니다.");
+            throw new Exception(MessageUtil.getMessage("travel.update.fail"));
         }
     }
 
     @Transactional
     public void delete(Long id) {
         Travel travel = travelRepository.findById(id).orElseThrow(() ->
-                new IllegalArgumentException("요청한 여행이 존재하지 않습니다."));
+                new IllegalArgumentException(MessageUtil.getMessage("cannot.find.travel")));
 
         //여행에 등록된 여행도시 삭제
         travelCityService.deleteAllToTravelId(id);

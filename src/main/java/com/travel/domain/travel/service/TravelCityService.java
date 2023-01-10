@@ -4,6 +4,7 @@ import com.travel.domain.travel.domain.city.TravelCity;
 import com.travel.domain.travel.domain.city.TravelCityQueryDslRepository;
 import com.travel.domain.travel.domain.city.TravelCityRepository;
 import com.travel.domain.travel.dto.city.TravelCityDto;
+import com.travel.global.util.MessageUtil;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -24,7 +25,7 @@ public class TravelCityService {
     @Transactional
     public void update(Long id, Long cityId) {
         TravelCity travelCity = travelCityRepository.findById(id).orElseThrow(() ->
-            new IllegalArgumentException("요청한 도시의 여행정보가 존재하지 않습니다."));
+            new IllegalArgumentException(MessageUtil.getMessage("cannot.find.travel.city")));
 
         travelCity.update(cityId);
     }
@@ -32,7 +33,7 @@ public class TravelCityService {
     @Transactional
     public void delete(Long id) {
         TravelCity travelCity = travelCityRepository.findById(id).orElseThrow(() ->
-                new IllegalArgumentException("요청한 도시의 여행정보가 존재하지 않습니다."));
+                new IllegalArgumentException(MessageUtil.getMessage("cannot.find.travel.city")));
 
         travelCityRepository.delete(travelCity);
     }

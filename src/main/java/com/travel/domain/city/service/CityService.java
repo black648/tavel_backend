@@ -8,6 +8,7 @@ import com.travel.domain.city.dto.CityDto;
 import com.travel.domain.city.dto.CitySaveDto;
 import com.travel.domain.city.dto.CityUpdateDto;
 import com.travel.domain.travel.service.TravelCityService;
+import com.travel.global.util.MessageUtil;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -40,7 +41,7 @@ public class CityService {
     @Transactional
     public void delete(Long id) {
         City city = cityRepository.findById(id).orElseThrow(() ->
-                new IllegalArgumentException("요청한 도시가 존재하지 않습니다."));
+                new IllegalArgumentException(MessageUtil.getMessage("cannot.find.city")));
 
         if (CollectionUtils.isEmpty(travelCityService.findByCityId(city.getId()))) {
             cityRepository.delete(city);
@@ -49,7 +50,7 @@ public class CityService {
 
     public CityDto get(Long id) {
         CityDto cityDto = CityDto.of(cityRepository.findById(id).orElseThrow(() ->
-                new IllegalArgumentException("요청한 도시가 존재하지 않습니다.")));
+                new IllegalArgumentException(MessageUtil.getMessage("cannot.find.city"))));
 
         //도시 이력 저장
         cityLogRepository.save(new CityLog(cityDto.getId()).toEntity());

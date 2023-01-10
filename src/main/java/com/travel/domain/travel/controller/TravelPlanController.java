@@ -27,8 +27,4 @@ public class TravelPlanController {
     public List<TravelPlanDto> getList(@RequestBody TravelPlanDto travelPlanDto) {
         return travelPlanService.getList(travelPlanDto);
     }
-    @GetMapping("/travelPlan/getList")
-    public List<TravelPlanDto> getgetList(@RequestBody TravelPlanDto travelPlanDto) {
-        return travelPlanService.getList(travelPlanDto);
-    }
 }
