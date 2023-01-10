@@ -1,17 +1,17 @@
 spring:
   profiles:
     group:
-      local:
+      development:
         - common
-      prod:
+      production:
         - common
-    active: prod
+    active: production
 
 ---
 spring:
   config:
     activate:
-      on-profile: local
+      on-profile: development
   datasource:
     url: 'jdbc:h2:mem:travel'
     username: 'travel'
@@ -26,7 +26,7 @@ spring:
 spring:
   config:
     activate:
-      on-profile: prod
+      on-profile: production
   datasource:
     url: jdbc:mysql://localhost:3306/travel?characterEncoding=UTF-8&serverTimezone=UTC
     username: 'travel'
