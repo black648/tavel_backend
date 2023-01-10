@@ -1,5 +1,11 @@
+# 개발환경
+ - Language  : Java17
+ - FrameWork : SpringBoot 3.0
+               QueryDSL 5.0
+ - DB : Mysql, H2DB
+
 # 환경설정
-1. DB
+1. DB 설정
    * mysql 설치
      - brew install mysql
      
