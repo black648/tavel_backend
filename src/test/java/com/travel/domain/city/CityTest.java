@@ -41,7 +41,7 @@ public class CityTest {
     @Autowired
     CityRepository cityRepository;
 
-    @DisplayName("[도시] 조회 SQL 수행을 위한 사전데이터 세팅 후 조회조건 및 순서에 맞게 조회")
+    @DisplayName("[도시 - MYSQL 에서 테스트] 조회 SQL 수행을 위한 사전데이터 세팅 후 조회조건 및 순서에 맞게 조회")
     @Test
     public void selectCityBeforeSetData() {
         //여행1 등록 - 중복
