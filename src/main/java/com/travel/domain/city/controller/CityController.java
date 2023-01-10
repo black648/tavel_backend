@@ -7,6 +7,9 @@ import com.travel.domain.city.service.CityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Map;
+
 @RequiredArgsConstructor
 @RestController
 public class CityController {
@@ -30,5 +33,10 @@ public class CityController {
     @PostMapping("/city/get/{id}")
     public CityDto get(@PathVariable Long id) {
         return cityService.get(id);
+    }
+
+    @PostMapping("/city/findCityListByUserIdNative")
+    public List<Map<String, Object>> findCityListByUserIdNative(@PathVariable String userId) {
+        return cityService.findCityListByUserIdNative(userId);
     }
 }
