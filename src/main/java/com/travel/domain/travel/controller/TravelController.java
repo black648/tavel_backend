@@ -1,10 +1,11 @@
 package com.travel.domain.travel.controller;
 
 import com.travel.domain.travel.dto.TravelRequestDto;
-import com.travel.domain.travel.dto.TravelResponseDto;
 import com.travel.domain.travel.dto.TravelSaveDto;
 import com.travel.domain.travel.dto.TravelUpdateDto;
 import com.travel.domain.travel.service.TravelService;
+import com.travel.global.result.ResultApi;
+import com.travel.global.result.ResultSet;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,16 +15,13 @@ public class TravelController {
     private final TravelService travelService;
 
     @PostMapping("/travel/save")
-    public Long save(@RequestBody TravelSaveDto travelSaveDto) {
-        return travelService.save(travelSaveDto);
+    public ResultApi save(@RequestBody TravelSaveDto travelSaveDto) {
+        return ResultSet.resultData(travelService.save(travelSaveDto));
     }
 
     @PutMapping("/travel/update/{id}")
-    public void update(@PathVariable Long id, @RequestBody TravelUpdateDto travelUpdateDto) {
-        try {
-            travelService.update(id, travelUpdateDto);
-        } catch (Exception e) {
-        }
+    public void update(@PathVariable Long id, @RequestBody TravelUpdateDto travelUpdateDto) throws Exception {
+        travelService.update(id, travelUpdateDto);
     }
 
     @DeleteMapping("/travel/delete/{id}")
@@ -32,7 +30,7 @@ public class TravelController {
     }
 
     @PostMapping("/travel/get")
-    public TravelResponseDto get(@RequestBody TravelRequestDto requestDto) {
-        return travelService.get(requestDto);
+    public ResultApi get(@RequestBody TravelRequestDto requestDto) {
+        return ResultSet.resultData(travelService.get(requestDto));
     }
 }

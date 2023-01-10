@@ -1,14 +1,12 @@
 package com.travel.domain.city.controller;
 
 import com.travel.domain.city.dto.CitySaveDto;
-import com.travel.domain.city.dto.CityDto;
 import com.travel.domain.city.dto.CityUpdateDto;
 import com.travel.domain.city.service.CityService;
+import com.travel.global.result.ResultApi;
+import com.travel.global.result.ResultSet;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.Map;
 
 @RequiredArgsConstructor
 @RestController
@@ -16,8 +14,8 @@ public class CityController {
     private final CityService cityService;
 
     @PostMapping("/city/save")
-    public Long save(@RequestBody CitySaveDto requestDto) {
-        return cityService.save(requestDto);
+    public ResultApi save(@RequestBody CitySaveDto requestDto) {
+        return ResultSet.resultData(cityService.save(requestDto));
     }
 
     @PutMapping("/city/update/{id}")
@@ -31,12 +29,12 @@ public class CityController {
     }
 
     @PostMapping("/city/get/{id}")
-    public CityDto get(@PathVariable Long id) {
-        return cityService.get(id);
+    public ResultApi get(@PathVariable Long id) {
+        return ResultSet.resultData(cityService.get(id));
     }
 
     @PostMapping("/city/findCityListByUserIdNative")
-    public List<Map<String, Object>> findCityListByUserIdNative(@PathVariable String userId) {
-        return cityService.findCityListByUserIdNative(userId);
+    public ResultApi findCityListByUserIdNative(@PathVariable String userId) {
+        return ResultSet.resultList(cityService.findCityListByUserIdNative(userId));
     }
 }
