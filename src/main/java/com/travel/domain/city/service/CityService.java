@@ -13,6 +13,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import java.util.List;
+import java.util.Map;
+
 @RequiredArgsConstructor
 @Service
 public class CityService {
@@ -52,5 +55,9 @@ public class CityService {
         cityLogRepository.save(new CityLog(cityDto.getId()).toEntity());
 
         return cityDto;
+    }
+
+    public List<Map<String, Object>> findCityListByUserIdNative(String userId) {
+        return cityRepository.findCityListByUserIdNative(userId);
     }
 }

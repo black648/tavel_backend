@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -102,6 +103,13 @@ class CityServiceTest {
         //then
         assertThat(cityDto.getName()).isEqualTo("서울");
         assertThat(cityDto.getCategory()).isEqualTo(CityCategory.SEOUL);
+    }
+
+    @DisplayName("[단위테스트] 단일 도시 조회 ")
+    @Test
+    public void findCityListByUserIdNative() {
+        List<Map<String, Object>> list = cityRepository.findCityListByUserIdNative("gogogo");
+        assertThat(list.get(0).get("name")).isEqualTo("제천");
     }
 
     private void checkSelectCityData(String name, CityCategory category) {
