@@ -31,8 +31,7 @@ public class TravelPlanServiceTest {
         travelPlanService.save(TravelPlanSaveDto.builder()
                 .travelId(1)
                 .travelDate("20221229")
-                .place("대학로")
-//                .orderNo(2)
+                .place("동성로")
                 .build());
 
         //when
@@ -58,6 +57,6 @@ public class TravelPlanServiceTest {
         List<TravelPlan> list = travelPlanRepository.findAll();
 
         //then
-//        assertThat(list.get(0).getPlace()).isEqualTo("대학로2");
+        assertThat(list.get(0).getPlace()).isEqualTo("대학로2");
     }
 }

@@ -1,8 +1,5 @@
 package com.travel.domain.travel.service;
 
-import com.travel.domain.city.domain.City;
-import com.travel.domain.city.domain.CityCategory;
-import com.travel.domain.city.dto.CitySaveDto;
 import com.travel.domain.travel.domain.city.TravelCity;
 import com.travel.domain.travel.domain.city.TravelCityRepository;
 import com.travel.domain.travel.dto.city.TravelCityDto;
@@ -24,10 +21,10 @@ public class TravelCityServiceTest {
     @Autowired
     TravelCityRepository travelCityRepository;
 
-//    @AfterEach
-//    public void clean() {
-//        travelCityRepository.deleteAll();
-//    }
+    @AfterEach
+    public void clean() {
+        travelCityRepository.deleteAll();
+    }
 
     @DisplayName("[단위테스트] 도시명 등록")
     @Test

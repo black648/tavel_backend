@@ -50,28 +50,29 @@ public class TravelTest {
         travelCityRepository.deleteAll();
     }
 
+
     @DisplayName("[여행] 여행등록_여행계획등록_도시등록_여행도시등록 일괄 테스트")
     @Test
-    public void saveTravel_TravelPlan_Travel_TravelCity() {
+    public void saveTravel_TravelPlan_City_TravelCity() {
         //여행등록
         Long travelId = travelService.save(TravelSaveDto.builder()
-                .name("대구여행 렛츠 고")
+                .name("강원여행 렛츠 고")
                 .userId("gogogo")
-                .travelStartDate("20221229")
-                .travelEndDate("20230101")
+                .travelStartDate("20230113")
+                .travelEndDate("20230117")
                 .build());
 
         //여행계획 등록
         travelPlanService.save(TravelPlanSaveDto.builder()
                 .travelId(travelId)
-                .travelDate("20221229")
-                .place("이월드")
+                .travelDate("20230113")
+                .place("경포대")
                 .build());
 
         //도시등록
         Long cityId = cityService.save(CitySaveDto.builder()
-                .name("대구")
-                .category(CityCategory.GYEONGSANG)
+                .name("과천")
+                .category(CityCategory.GYEONGGI)
                 .build());
 
         //여행도시 등록
@@ -81,7 +82,7 @@ public class TravelTest {
                 .build());
 
         List<Travel> travelList = travelRepository.findAll();
-        assertThat(travelList.get(0).getName()).isEqualTo("대구여행 렛츠 고");
+        assertThat(travelList.get(0).getName()).isEqualTo("강원여행 렛츠 고");
     }
 
     @DisplayName("[여행] 여행, 여행계획 등록 후 여행계획 편집까지 수행")
@@ -114,12 +115,12 @@ public class TravelTest {
 
         //결과확인
         List<TravelPlan> list = travelPlanRepository.findAll();
-        assertThat(list.get(0).getPlace()).isEqualTo("대학로2");
+        assertThat(list.get(0).getPlace()).isEqualTo("신촌");
     }
 
     @DisplayName("[여행] 등록한 여행에 대한 여행계획 등록 후 일정 변경")
     @Test
-    public void updateTravel_Travel_Plan_TravelCity() throws Exception {
+    public void updateTravel_TravelPlan_TravelCity() throws Exception {
         //여행등록
         Long travelId = travelService.save(TravelSaveDto.builder()
                 .name("대구여행 렛츠 고")
@@ -154,7 +155,7 @@ public class TravelTest {
         assertThat(list.get(0).getPlace()).isEqualTo("대학로2");
     }
 
-    @DisplayName("[여행] 등록한 여행에 도시정보를 추가한다.")
+    @DisplayName("[여행] 등록한 여행에 도시정보를 추가")
     @Test
     public void createTravel_createTravelCity_updateTravelCity() throws Exception {
         //도시등록
@@ -184,7 +185,7 @@ public class TravelTest {
         assertThat(travelCity.getCityId()).isEqualTo(cityId);
     }
 
-    @DisplayName("[여행] 여행, 여행계획, 여행도시 등록 후 삭제한다.")
+    @DisplayName("[여행] 여행, 여행계획, 여행도시 등록 후 삭제")
     @Test
     public void createTravel_delete() throws Exception {
         //여행등록
@@ -247,7 +248,7 @@ public class TravelTest {
         travelPlanService.saveAll(planSaveDtoList);
 
         //여행조회
-        TravelResponseDto travel = travelService.get(TravelRequestDto.builder().id(14L).searchType(TravelSearchType.PLAN).build());
+        TravelResponseDto travel = travelService.get(TravelRequestDto.builder().id(travelId).searchType(TravelSearchType.PLAN).build());
         assertThat(travel.getName()).isEqualTo("대구여행 렛츠 고");
         assertThat(travel.getTravelPlanList().get(0).getPlace()).isEqualTo("대학로2");
     }

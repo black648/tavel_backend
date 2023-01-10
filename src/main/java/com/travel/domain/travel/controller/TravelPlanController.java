@@ -4,10 +4,7 @@ import com.travel.domain.travel.dto.plan.TravelPlanDto;
 import com.travel.domain.travel.dto.plan.TravelPlanSaveDto;
 import com.travel.domain.travel.service.TravelPlanService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,6 +25,10 @@ public class TravelPlanController {
 
     @PostMapping("/travelPlan/getList")
     public List<TravelPlanDto> getList(@RequestBody TravelPlanDto travelPlanDto) {
+        return travelPlanService.getList(travelPlanDto);
+    }
+    @GetMapping("/travelPlan/getList")
+    public List<TravelPlanDto> getgetList(@RequestBody TravelPlanDto travelPlanDto) {
         return travelPlanService.getList(travelPlanDto);
     }
 }
