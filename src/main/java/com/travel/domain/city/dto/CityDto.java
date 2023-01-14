@@ -20,11 +20,11 @@ public class CityDto {
         this.category = category;
     }
 
-    public static CityDto of(City city) {
+    public static CityDto of(City City) {
         return new CityDto(
-                city.getId(),
-                city.getName(),
-                city.getCategory()
+                City.getId(),
+                City.getName(),
+                City.getCategory()
         );
     }
 }

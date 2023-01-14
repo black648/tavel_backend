@@ -4,9 +4,7 @@ import com.travel.domain.city.domain.City;
 import com.travel.domain.city.domain.CityRepository;
 import com.travel.domain.city.domain.log.CityLog;
 import com.travel.domain.city.domain.log.CityLogRepository;
-import com.travel.domain.city.dto.CityDto;
-import com.travel.domain.city.dto.CitySaveDto;
-import com.travel.domain.city.dto.CityUpdateDto;
+import com.travel.domain.city.dto.*;
 import com.travel.domain.travel.service.TravelCityService;
 import com.travel.global.util.MessageUtil;
 import jakarta.transaction.Transactional;
@@ -26,25 +24,25 @@ public class CityService {
     private final TravelCityService travelCityService;
 
     @Transactional
-    public Long save(CitySaveDto requestDto) {
-        return cityRepository.save(requestDto.toEntity()).getId();
+    public Long save(CitySaveDto saveDto) {
+        return 0L;
     }
 
     @Transactional
     public void update(Long id, CityUpdateDto cityUpdateDto) {
-        City city = cityRepository.findById(id).orElseThrow(() ->
+        City City = cityRepository.findById(id).orElseThrow(() ->
             new IllegalArgumentException("요청한 도시가 존재하지 않습니다."));
 
-        city.update(cityUpdateDto);
+        City.update(cityUpdateDto);
     }
 
     @Transactional
     public void delete(Long id) {
-        City city = cityRepository.findById(id).orElseThrow(() ->
+        City City = cityRepository.findById(id).orElseThrow(() ->
                 new IllegalArgumentException(MessageUtil.getMessage("cannot.find.city")));
 
-        if (CollectionUtils.isEmpty(travelCityService.findByCityId(city.getId()))) {
-            cityRepository.delete(city);
+        if (CollectionUtils.isEmpty(travelCityService.findByCityId(City.getId()))) {
+            cityRepository.delete(City);
         }
     }
 
