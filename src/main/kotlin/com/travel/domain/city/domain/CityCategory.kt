@@ -1,7 +1,6 @@
-package com.travel.domain.city.domain;
+package com.travel.domain.city.domain
 
-
-public enum CityCategory {
+enum class CityCategory {
     SEOUL,
     GANGWON,
     GYEONGGI,

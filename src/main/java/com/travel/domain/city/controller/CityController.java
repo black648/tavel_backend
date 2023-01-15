@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.*;
 public class CityController {
     private final CityService cityService;
 
-    @PostMapping("/city/save")
-    public ResultApi save(@RequestBody CitySaveDto requestDto) {
-        return ResultSet.resultData(cityService.save(requestDto));
-    }
+//    @PostMapping("/city/save")
+//    public ResultApi save(@RequestBody CitySaveDto requestDto) {
+//        return ResultSet.resultData(cityService.save(requestDto));
+//    }
 
     @PutMapping("/city/update/{id}")
     public void update(@PathVariable Long id, @RequestBody CityUpdateDto cityUpdateDto) {

@@ -1,6 +1,5 @@
 package com.travel.domain.travel.service;
 
-import com.travel.domain.city.domain.City;
 import com.travel.domain.travel.domain.Travel;
 import com.travel.domain.travel.domain.TravelRepository;
 import com.travel.domain.travel.dto.*;
