@@ -1,6 +1,6 @@
 package com.travel.domain.travel.domain.plan;
 
-import com.travel.domain.travel.domain.Travel;
+import com.travel.domain.travel.domain.JavaTravel;
 import com.travel.global.base.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Builder;
@@ -11,14 +11,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name="travelPlan")
-public class TravelPlan extends BaseEntity {
+public class JavaTravelPlan extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name = "travelId", insertable = false, updatable = false)
-    private Travel travel;
+    private JavaTravel travel;
 
     @Column(name = "travelId")
     private Long travelId;
@@ -33,7 +33,7 @@ public class TravelPlan extends BaseEntity {
     private int orderNo;
 
     @Builder
-    public TravelPlan(Long travelId, String travelDate, String place, int orderNo) {
+    public JavaTravelPlan(Long travelId, String travelDate, String place, int orderNo) {
         this.travelId = travelId;
         this.travelDate = travelDate;
         this.place = place;

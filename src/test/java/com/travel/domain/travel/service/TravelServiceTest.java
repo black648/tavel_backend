@@ -1,6 +1,6 @@
 package com.travel.domain.travel.service;
 
-import com.travel.domain.travel.domain.Travel;
+import com.travel.domain.travel.domain.JavaTravel;
 import com.travel.domain.travel.domain.TravelRepository;
 import com.travel.domain.travel.dto.*;
 import org.junit.jupiter.api.AfterEach;
@@ -39,7 +39,7 @@ public class TravelServiceTest {
                 .build());
 
         //when
-        List<Travel> list = travelRepository.findAll();
+        List<JavaTravel> list = travelRepository.findAll();
 
         //then
         assertThat(list.get(0).getName()).isEqualTo("대구여행 렛츠 고");
@@ -64,7 +64,7 @@ public class TravelServiceTest {
                 .build());
 
         //then
-        List<Travel> travel = travelRepository.findAll();
+        List<JavaTravel> travel = travelRepository.findAll();
         assertThat(travel.get(0).getName()).isEqualTo("전주여행 렛츠 고");
         assertThat(travel.get(0).getTravelStartDate()).isEqualTo("20221230");
         assertThat(travel.get(0).getTravelEndDate()).isEqualTo("20230101");
@@ -85,7 +85,7 @@ public class TravelServiceTest {
         travelService.delete(saveCity);
 
         //then
-        List<Travel> travelList = travelRepository.findAll();
+        List<JavaTravel> travelList = travelRepository.findAll();
         assertThat(travelList.size()).isEqualTo(0);
     }
 
