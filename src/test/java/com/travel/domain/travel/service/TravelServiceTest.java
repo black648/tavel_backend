@@ -57,7 +57,7 @@ public class TravelServiceTest {
                 .build());
 
         //when
-        travelService.update(1L, TravelUpdateDto.builder()
+        travelService.update(1L, JavaTravelUpdateDto.builder()
                 .name("전주여행 렛츠 고")
                 .travelStartDate("20221230")
                 .travelEndDate("20230101")
@@ -92,7 +92,7 @@ public class TravelServiceTest {
     @DisplayName("[단위테스트] 여행 삭제 ")
     @Test
     public void get() {
-        JavaTravelResponseDto responseDto = travelService.get(JavaTravelRequestDto.builder().id(10L).searchType(TravelSearchType.PLAN).build());
+        JavaTravelResponseDto responseDto = travelService.get(JavaTravelRequestDto.builder().id(10L).searchType(JavaTravelSearchType.PLAN).build());
 
         assertThat(responseDto.getId()).isEqualTo(10L);
     }
