@@ -31,7 +31,7 @@ public class TravelServiceTest {
     @Test
     public void save() {
         //given
-        travelService.save(TravelSaveDto.builder()
+        travelService.save(JavaTravelSaveDto.builder()
                 .name("대구여행 렛츠 고")
                 .userId("gogogo")
                 .travelStartDate("20221229")
@@ -49,7 +49,7 @@ public class TravelServiceTest {
     @Test
     public void update() throws Exception {
         //given
-        Long saveCity = travelService.save(TravelSaveDto.builder()
+        Long saveCity = travelService.save(JavaTravelSaveDto.builder()
                 .name("대구여행 렛츠 고")
                 .userId("gogogo")
                 .travelStartDate("20221229")
@@ -74,7 +74,7 @@ public class TravelServiceTest {
     @Test
     public void delete() {
         //given
-        Long saveCity = travelService.save(TravelSaveDto.builder()
+        Long saveCity = travelService.save(JavaTravelSaveDto.builder()
                 .name("대구여행 렛츠 고")
                 .userId("gogogo")
                 .travelStartDate("20221229")
@@ -92,7 +92,7 @@ public class TravelServiceTest {
     @DisplayName("[단위테스트] 여행 삭제 ")
     @Test
     public void get() {
-        TravelResponseDto responseDto = travelService.get(TravelRequestDto.builder().id(10L).searchType(TravelSearchType.PLAN).build());
+        JavaTravelResponseDto responseDto = travelService.get(JavaTravelRequestDto.builder().id(10L).searchType(TravelSearchType.PLAN).build());
 
         assertThat(responseDto.getId()).isEqualTo(10L);
     }
