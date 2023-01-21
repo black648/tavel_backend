@@ -2,7 +2,7 @@ package com.travel.domain.travel.domain
 
 import com.travel.domain.travel.domain.city.TravelCity
 import com.travel.domain.travel.domain.plan.TravelPlan
-import com.travel.domain.travel.dto.JavaTravelUpdateDto
+import com.travel.domain.travel.dto.TravelUpdateDto
 import com.travel.global.base.BaseEntity
 import jakarta.persistence.*
 
@@ -31,7 +31,7 @@ class Travel(
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         var id: Long? = null
 ): BaseEntity() {
-        fun update(travelUpdateDto: JavaTravelUpdateDto) {
+        fun update(travelUpdateDto: TravelUpdateDto) {
                 this.name = travelUpdateDto.name
                 this.travelStartDate = travelUpdateDto.travelStartDate
                 this.travelEndDate = travelUpdateDto.travelEndDate
