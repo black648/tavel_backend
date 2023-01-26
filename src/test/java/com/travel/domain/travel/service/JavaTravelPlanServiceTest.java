@@ -14,7 +14,7 @@
 //import static org.assertj.core.api.Assertions.assertThat;
 //
 //@SpringBootTest
-//public class TravelPlanServiceTest {
+//public class JavaTravelPlanServiceTest {
 //    @Autowired
 //    TravelService travelService;
 //
