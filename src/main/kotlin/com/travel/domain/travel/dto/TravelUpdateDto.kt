@@ -1,7 +1,6 @@
 package com.travel.domain.travel.dto
 
-class TravelUpdateDto(
-        val id: Long,
+data class TravelUpdateDto(
         val name: String,
         val travelStartDate: String,
         val travelEndDate: String

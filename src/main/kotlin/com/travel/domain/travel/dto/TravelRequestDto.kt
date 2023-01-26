@@ -6,6 +6,6 @@ data class TravelRequestDto(
         val userId: String,
         val travelStartDate: String,
         val travelEndDate: String,
-        val searchType: TravelSearchType
+        val searchType: TravelSearchType = TravelSearchType.NORMAL
 ) {
 }
