@@ -1,6 +1,9 @@
 package com.travel.domain.travel.domain
 
 import com.querydsl.jpa.impl.JPAQueryFactory
+import com.travel.domain.travel.domain.QTravel.travel
+import com.travel.domain.travel.domain.city.QTravelCity.travelCity
+import com.travel.domain.travel.domain.plan.QTravelPlan.travelPlan
 import com.travel.domain.travel.dto.TravelRequestDto
 import com.travel.global.util.RepositoryUtil
 import jakarta.persistence.EntityManager
@@ -14,8 +17,8 @@ class TravelQueryDslRepository(em: EntityManager?) {
         queryFactory = JPAQueryFactory(em)
     }
 
-    operator fun get(requestDto: TravelRequestDto): Travel? {
-        return queryFactory.select<Any>(travel)
+    fun get(requestDto: TravelRequestDto): Travel? {
+        return queryFactory.select(travel)
                 .from(travel)
                 .where(
                         RepositoryUtil.equalsLong(requestDto.id, travel.id),
@@ -26,8 +29,8 @@ class TravelQueryDslRepository(em: EntityManager?) {
                 .fetchOne()
     }
 
-    fun getIncludePlan(requestDto: TravelRequestDto): Travel {
-        return queryFactory.select<Any>(travel)
+    fun getIncludePlan(requestDto: TravelRequestDto): Travel? {
+        return queryFactory.select(travel)
                 .from(travel)
                 .where(
                         RepositoryUtil.equalsLong(requestDto.id, travel.id),
@@ -39,8 +42,8 @@ class TravelQueryDslRepository(em: EntityManager?) {
                 .fetchOne()
     }
 
-    fun getIncludeCity(requestDto: TravelRequestDto): Travel {
-        return queryFactory.select<Any>(travel)
+    fun getIncludeCity(requestDto: TravelRequestDto): Travel? {
+        return queryFactory.select(travel)
                 .from(travel)
                 .where(
                         RepositoryUtil.equalsLong(requestDto.id, travel.id),
