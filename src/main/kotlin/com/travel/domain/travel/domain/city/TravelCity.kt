@@ -1,6 +1,6 @@
 package com.travel.domain.travel.domain.city
 
-import com.travel.domain.travel.domain.JavaTravel
+import com.travel.domain.travel.domain.Travel
 import com.travel.global.base.BaseEntity
 import jakarta.persistence.*
 
@@ -8,17 +8,17 @@ import jakarta.persistence.*
 @Table(name = "travelCity")
 class TravelCity(
         @Column(name = "travelId")
-        val travelId: Long,
+        var travelId: Long,
 
         @Column
         var cityId: Long,
 
         @Column
-        val orderNo: Int,
-        
+        var orderNo: Int,
+
         @ManyToOne(fetch = FetchType.LAZY)
         @JoinColumn(name = "travelId", insertable = false, updatable = false)
-        val travel: JavaTravel,
+        val travel: Travel? = null,
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)

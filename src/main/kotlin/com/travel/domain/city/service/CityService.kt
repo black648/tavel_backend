@@ -33,11 +33,11 @@ class CityService(
 
     @Transactional
     fun delete(id: Long) {
-        val City = cityRepository.findByIdOrThrow(id)
+        val city = cityRepository.findByIdOrThrow(id)
 
         //여행중인 도시가 아니면 삭제 가능
-        if (CollectionUtils.isEmpty(travelCityService.findByCityId(City.id))) {
-            cityRepository.delete(City)
+        if (CollectionUtils.isEmpty(travelCityService.findByCityId(city.id!!))) {
+            cityRepository.delete(city)
         }
     }
 
@@ -49,7 +49,7 @@ class CityService(
         return cityDto
     }
 
-    fun findCityListByUserIdNative(userId: String?): List<Map<String?, Any?>?>? {
+    fun findCityListByUserIdNative(userId: String): List<Map<String, Any>> {
         return cityRepository.findCityListByUserIdNative(userId)
     }
 }

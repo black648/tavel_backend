@@ -8,4 +8,4 @@ enum class CityCategory {
     CHUNGCHEONG,
     JEJU,
     JEOLLA
-}
+} 

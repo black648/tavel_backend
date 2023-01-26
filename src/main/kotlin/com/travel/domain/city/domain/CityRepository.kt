@@ -37,5 +37,5 @@ interface CityRepository: JpaRepository<City, Long> {
             "                                                        ORDER BY CL.Create_date DESC)" +
             "                                                   ) COMBINE LIMIT 10)" +
             ") city", nativeQuery = true, countProjection = "id")
-    fun findCityListByUserIdNative(userId: String?): List<Map<String?, Any?>?>?
+    fun findCityListByUserIdNative(userId: String): List<Map<String, Any>>
 }
