@@ -13,7 +13,7 @@ class MemberService(
         private val memberRepository: MemberRepository
 ) {
     fun save(saveDto: MemberSaveDto): Member {
-        saveDto.password = passwordEncoder.encode(saveDto.password);
+        saveDto.pw = passwordEncoder.encode(saveDto.pw);
         return memberRepository.save(saveDto.toEntity());
     }
 }

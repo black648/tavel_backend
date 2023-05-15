@@ -30,7 +30,7 @@ class JwtTokenProvider(
     }
 
     //토큰 생성
-    fun generateToken(authentication: Authentication): TokenInfo? {
+    fun generateToken(authentication: Authentication): TokenInfo {
         // 권한 가져오기
         val authorities: String = authentication.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
