@@ -10,10 +10,8 @@ import com.travel.global.util.DateUtil
 import com.travel.global.util.MessageUtil
 import com.travel.global.util.findByIdOrThrow
 import jakarta.transaction.Transactional
-import lombok.RequiredArgsConstructor
 import org.springframework.stereotype.Service
 
-@RequiredArgsConstructor
 @Service
 class TravelService(
         private val travelRepository: TravelRepository,

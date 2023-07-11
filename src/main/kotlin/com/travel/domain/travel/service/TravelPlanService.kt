@@ -7,11 +7,9 @@ import com.travel.domain.travel.dto.plan.TravelPlanDto
 import com.travel.domain.travel.dto.plan.TravelPlanSaveDto
 import com.travel.domain.travel.dto.plan.TravelPlanUpdateDto
 import jakarta.transaction.Transactional
-import lombok.RequiredArgsConstructor
 import org.springframework.stereotype.Service
 import java.util.stream.Collectors
 
-@RequiredArgsConstructor
 @Service
 class TravelPlanService(
         private val travelPlanRepository: TravelPlanRepository,

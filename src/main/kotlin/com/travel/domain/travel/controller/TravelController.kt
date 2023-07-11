@@ -6,12 +6,10 @@ import com.travel.domain.travel.dto.TravelUpdateDto
 import com.travel.domain.travel.service.TravelService
 import com.travel.global.result.ResultApi
 import com.travel.global.result.ResultSet
-import lombok.RequiredArgsConstructor
 import org.springframework.web.bind.annotation.*
 
-@RequiredArgsConstructor
 @RestController
-class JavaTravelController(
+class TravelController(
         private val travelService: TravelService
 ) {
 

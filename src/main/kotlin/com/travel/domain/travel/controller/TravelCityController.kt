@@ -3,10 +3,8 @@ package com.travel.domain.travel.controller
 import com.travel.domain.travel.dto.city.TravelCityDto
 import com.travel.domain.travel.service.TravelCityService
 import com.travel.global.result.ResultSet
-import lombok.RequiredArgsConstructor
 import org.springframework.web.bind.annotation.*
 
-@RequiredArgsConstructor
 @RestController
 class TravelCityController(
        private val travelCityService: TravelCityService

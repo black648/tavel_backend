@@ -5,15 +5,13 @@ import com.travel.domain.travel.dto.plan.TravelPlanSaveDto
 import com.travel.domain.travel.service.TravelPlanService
 import com.travel.global.result.ResultApi
 import com.travel.global.result.ResultSet
-import lombok.RequiredArgsConstructor
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
 
-@RequiredArgsConstructor
 @RestController
-class JavaTravelPlanController(
+class TravelPlanController(
         private val travelPlanService: TravelPlanService
 ) {
     @PostMapping("/travelPlan/save")

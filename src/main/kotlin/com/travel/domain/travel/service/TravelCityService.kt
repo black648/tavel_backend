@@ -6,10 +6,8 @@ import com.travel.domain.travel.domain.city.TravelCityRepository
 import com.travel.domain.travel.dto.city.TravelCityDto
 import com.travel.global.util.findByIdOrThrow
 import jakarta.transaction.Transactional
-import lombok.RequiredArgsConstructor
 import org.springframework.stereotype.Service
 
-@RequiredArgsConstructor
 @Service
 class TravelCityService(
         private val travelCityRepository: TravelCityRepository,

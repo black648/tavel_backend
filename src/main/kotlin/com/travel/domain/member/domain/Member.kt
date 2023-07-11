@@ -1,7 +1,6 @@
 package com.travel.domain.member.domain
 
 import jakarta.persistence.*
-import lombok.Builder
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
@@ -28,7 +27,6 @@ class Member(
         val memberRole: MemberRole,
 
         @ElementCollection(fetch = FetchType.EAGER)
-        @Builder.Default
         val roles: MutableList<String> = mutableListOf<String>()
 
 ) : UserDetails {
