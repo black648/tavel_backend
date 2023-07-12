@@ -12,10 +12,10 @@ import java.time.LocalDateTime
 @EntityListeners(AuditingEntityListener::class)
 class BaseEntity constructor(
     @CreatedDate
-     val createDate: LocalDateTime? = null,
+    var createDate: LocalDateTime?=null,
 
     @LastModifiedDate
-    val modifiedDate: LocalDateTime? = null
+    var modifiedDate: LocalDateTime?=null
 ) {
 
 }

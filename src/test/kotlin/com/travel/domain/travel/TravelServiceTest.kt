@@ -26,17 +26,17 @@ class TravelServiceTest @Autowired constructor(
     fun save() {
         //given
         travelService.save(TravelSaveDto(
-                name = "대구여행 렛츠 고",
-                userId = "gogogo",
-                travelStartDate = "20221229",
-                travelEndDate = "20230101"
+                name = "제주여행 렛츠 고",
+                userId = "gogogo11",
+                travelStartDate = "20230529",
+                travelEndDate = "20230701"
         ))
 
         //when
         val list: List<Travel> = travelRepository!!.findAll()
 
         //then
-        assertThat(list[0].name).isEqualTo("대구여행 렛츠 고")
+        assertThat(list[0].name).isEqualTo("제주여행 렛츠 고")
     }
 
     @DisplayName("[단위테스트] 여행 수정")
