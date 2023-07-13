@@ -20,17 +20,16 @@ class SecurityConfig(
     @Throws(Exception::class)
     fun filterChain(http: HttpSecurity): SecurityFilterChain {
         http
-                .httpBasic().disable()
-                .csrf().disable()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-                .authorizeHttpRequests()
-                .requestMatchers("/login/**", "/join/**", "/error/**").permitAll()
-                .requestMatchers("/").hasRole("USER")
-                .requestMatchers("/admin/**").hasRole("ADMIN")
-                .anyRequest().authenticated()
-                .and()
-                .addFilterBefore(JwtAuthFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter::class.java)
+            .httpBasic{ httpBasic -> httpBasic.disable() }
+            .csrf { csrf -> csrf.disable() }
+            .sessionManagement{session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)}
+            .authorizeHttpRequests { auth ->
+                auth
+                    .requestMatchers("/login/**", "/join/**", "/error/**").permitAll()
+                    .requestMatchers("/").hasRole("USER")
+                    .requestMatchers("/admin/**").hasRole("ADMIN")
+                    .anyRequest().authenticated() }
+            .addFilterBefore(JwtAuthFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter::class.java)
         return http.build()
     }
 
