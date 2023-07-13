@@ -14,21 +14,21 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 class SecurityConfig(
-        val jwtTokenProvider: JwtTokenProvider
+        private val jwtTokenProvider: JwtTokenProvider
 ) {
     @Bean
     @Throws(Exception::class)
     fun filterChain(http: HttpSecurity): SecurityFilterChain {
         http
-            .httpBasic{ httpBasic -> httpBasic.disable() }
-            .csrf { csrf -> csrf.disable() }
-            .sessionManagement{session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)}
-            .authorizeHttpRequests { auth ->
-                auth
-                    .requestMatchers("/login/**", "/join/**", "/error/**").permitAll()
-                    .requestMatchers("/").hasRole("USER")
+            .httpBasic{ it.disable() }
+            .csrf { it.disable() }
+            .sessionManagement{ it.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
+            .authorizeHttpRequests {
+                it.requestMatchers("/login/**", "/join/**", "/error/**").permitAll()
                     .requestMatchers("/admin/**").hasRole("ADMIN")
+                    .requestMatchers("/").hasRole("USER")
                     .anyRequest().authenticated() }
+            // UsernamePasswordAuthenticationFilter 보다 JwtAuthFilter를  먼저 사용해라는 뜻
             .addFilterBefore(JwtAuthFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter::class.java)
         return http.build()
     }
