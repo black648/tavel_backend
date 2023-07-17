@@ -1,25 +1,19 @@
 package com.travel.domain.login.dto
 
-import com.travel.domain.member.domain.Member
-import com.travel.domain.member.domain.MemberRole
-import com.travel.global.config.sercurity.TokenInfo
+import com.fasterxml.jackson.annotation.JsonProperty
+import jakarta.validation.constraints.NotBlank
 
 data class LoginDto(
-        val email: String,
-        val password: String,
-        val name: String,
-        val memberRole: MemberRole,
-        val tokenInfo: TokenInfo) {
+    @field:NotBlank
+    @JsonProperty("email")
+    private val _email: String?,
 
-    companion object {
-        fun of(member: Member, tokenInfo: TokenInfo): LoginDto {
-            return LoginDto(
-                    email = member.email,
-                    password = member.password,
-                    name = member.name,
-                    memberRole = member.memberRole,
-                    tokenInfo = tokenInfo
-            )
-        }
-    }
+    @field:NotBlank
+    @JsonProperty("password")
+    private val _password: String?
+) {
+    val email: String
+        get() = _email!!
+    val password: String
+        get() = _password!!
 }

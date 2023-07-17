@@ -2,6 +2,7 @@ package com.travel.domain.member.service
 
 import com.travel.domain.member.domain.Member
 import com.travel.domain.member.domain.MemberRepository
+import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.User
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
@@ -14,19 +15,15 @@ class CustomUserDetailService(
         private val memberRepository: MemberRepository,
         private val passwordEncoder: PasswordEncoder
 ) : UserDetailsService {
+    override fun loadUserByUsername(username: String): UserDetails =
+        memberRepository.findByEmail(username)
+            ?.let { createUserDetails(it) }
+            ?: throw Exception("해당 유저를 찾을 수 없습니다.")
 
-    @Throws(UsernameNotFoundException::class)
-    override fun loadUserByUsername(username: String): UserDetails {
-        return memberRepository.findByEmail(username)
-                .orElseThrow { UsernameNotFoundException("사용자를 찾을 수 없습니다.") }
-    }
+    private fun createUserDetails(member: Member): UserDetails =
+        User(member.email
+            , passwordEncoder.encode(member.password)
+            , member.memberRole!!.map { SimpleGrantedAuthority("ROLE_${it.role}") })
 
-    private fun createUserDetails(member: Member) : UserDetails {
-        return User.builder()
-            .username(member.username)
-            .password(passwordEncoder.encode(member.password))
-            .roles(member.roles.map{it[0]}.toTypedArray().toString())
-            .build()
-    }
 }
 

@@ -19,6 +19,6 @@ class LoginController(
 
     @PostMapping("/login")
     fun login(@RequestBody dto: LoginDto) {
-        ResultSet.resultData(loginService.login(dto.email, dto.password))
+        ResultSet.resultData(loginService.login(dto))
     }
 }

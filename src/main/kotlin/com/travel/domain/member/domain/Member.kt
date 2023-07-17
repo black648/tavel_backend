@@ -16,14 +16,14 @@ class Member(
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         val id: Long? = null,
 
-        @Column(nullable = false)
+        @Column(nullable = false, length = 10)
         val name: String,
 
-        @Column(nullable = false)
+        @Column(nullable = false, length = 30)
         val email: String,
 
-        @Column(nullable = false)
-        val pw: String
+        @Column(nullable = false, length = 50)
+        val password: String
 ) {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
     val memberRole: List<MemberRole>? = null

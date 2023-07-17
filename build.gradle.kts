@@ -39,6 +39,7 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.springframework.boot:spring-boot-starter-security")
+	implementation("org.springframework.boot:spring-boot-starter-validation")
 	implementation("com.vladmihalcea:hibernate-types-60:2.20.0")
 	implementation("com.infobip:infobip-spring-data-jpa-querydsl-boot-starter:8.0.0")
 
