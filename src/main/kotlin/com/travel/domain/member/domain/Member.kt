@@ -1,11 +1,9 @@
 package com.travel.domain.member.domain
 
-import com.travel.global.status.MemberRoles
+import com.travel.domain.member.dto.MemberResponseDto
+import com.travel.global.base.BaseEntity
+import com.travel.global.enum.MemberRoles
 import jakarta.persistence.*
-import org.springframework.security.core.GrantedAuthority
-import org.springframework.security.core.authority.SimpleGrantedAuthority
-import org.springframework.security.core.userdetails.UserDetails
-import java.util.stream.Collectors
 
 @Entity
 @Table(name = "member", uniqueConstraints = [
@@ -24,9 +22,15 @@ class Member(
 
         @Column(nullable = false, length = 50)
         val password: String
-) {
+): BaseEntity() {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
     val memberRole: List<MemberRole>? = null
+
+    fun toDto(): MemberResponseDto = MemberResponseDto(
+        id!!,
+        email,
+        name
+    )
 }
 
 @Entity

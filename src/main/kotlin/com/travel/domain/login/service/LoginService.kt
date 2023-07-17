@@ -2,14 +2,12 @@ package com.travel.domain.login.service
 
 import com.travel.domain.login.dto.LoginDto
 import com.travel.domain.member.domain.Member
-import com.travel.domain.member.domain.MemberRepository
 import com.travel.domain.member.dto.MemberSaveDto
 import com.travel.domain.member.service.MemberService
 import com.travel.global.config.sercurity.JwtTokenProvider
 import com.travel.global.config.sercurity.TokenInfo
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
-import org.springframework.security.core.Authentication
 import org.springframework.stereotype.Service
 import kotlin.math.log
 
@@ -20,9 +18,9 @@ class LoginService(
     private val tokenProvider: JwtTokenProvider,
     private val memberService: MemberService,
 ) {
-    fun doJoin(dto: MemberSaveDto) : TokenInfo {
-        val member : Member = memberService.save(dto);
-        return login(LoginDto(member.email, member.password))
+    fun doJoin(dto: MemberSaveDto) : String {
+        memberService.save(dto)
+        return "회원가입이 완료되었습니다."
     }
 
     fun login(loginDto: LoginDto): TokenInfo {

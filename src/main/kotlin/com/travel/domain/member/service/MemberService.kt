@@ -5,7 +5,8 @@ import com.travel.domain.member.domain.MemberRepository
 import com.travel.domain.member.domain.MemberRole
 import com.travel.domain.member.domain.MemberRoleRepository
 import com.travel.domain.member.dto.MemberSaveDto
-import com.travel.global.status.MemberRoles
+import com.travel.global.enum.MemberRoles
+import com.travel.global.exception.InvalidInputException
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 
@@ -19,7 +20,7 @@ class MemberService(
         // email 중복검사
         var member: Member? = memberRepository.findByEmail(saveDto.email)
         if(member != null) {
-            throw Exception("이미 등록된 이메일 입니다.")
+            throw InvalidInputException("이미 등록된 이메일 입니다.")
         }
 
         saveDto.password = passwordEncoder.encode(saveDto.password);
