@@ -1,5 +1,6 @@
 package com.travel.domain.member.domain
 
+import com.travel.global.status.MemberRoles
 import jakarta.persistence.*
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
@@ -7,7 +8,9 @@ import org.springframework.security.core.userdetails.UserDetails
 import java.util.stream.Collectors
 
 @Entity
-@Table(name = "member")
+@Table(name = "member", uniqueConstraints = [
+        UniqueConstraint(name = "uk_member_email", columnNames = ["email"])
+    ])
 class Member(
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,44 +23,23 @@ class Member(
         val email: String,
 
         @Column(nullable = false)
-        val pw: String,
-
-        @Enumerated(EnumType.STRING)
-        @Column(nullable = false)
-        val memberRole: MemberRole,
-
-        @ElementCollection(fetch = FetchType.EAGER)
-        val roles: MutableList<String> = mutableListOf<String>()
-
-) : UserDetails {
-    override fun getAuthorities(): MutableCollection<out GrantedAuthority> {
-        return this.roles.stream()
-            .map{SimpleGrantedAuthority(it)}
-            .collect(Collectors.toList())
-    }
-
-    override fun getPassword(): String {
-        return pw
-    }
-
-    override fun getUsername(): String {
-        return email
-    }
-
-    override fun isAccountNonExpired(): Boolean {
-        return true;
-    }
-
-    override fun isAccountNonLocked(): Boolean {
-        return true;
-    }
-
-    override fun isCredentialsNonExpired(): Boolean {
-        return true;
-    }
-
-    override fun isEnabled(): Boolean {
-        return true;
-    }
-
+        val pw: String
+) {
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
+    val memberRole: List<MemberRole>? = null
 }
+
+@Entity
+class MemberRole(
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    var id: Long? = null,
+
+    @Column(nullable = false, length = 30)
+    @Enumerated(EnumType.STRING)
+    val role: MemberRoles,
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(foreignKey = ForeignKey(name = "fk_member_role_member_id"))
+    val member: Member
+)

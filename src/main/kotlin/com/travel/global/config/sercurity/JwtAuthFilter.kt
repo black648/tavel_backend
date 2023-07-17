@@ -15,8 +15,8 @@ import org.springframework.web.filter.GenericFilterBean
 class JwtAuthFilter(
         private val jwtTokenProvider: JwtTokenProvider
 ): GenericFilterBean() {
-    @Throws(IOException::class, ServletException::class)
-    override fun doFilter(request: ServletRequest, response: ServletResponse?, chain: FilterChain) {
+
+    override fun doFilter(request: ServletRequest?, response: ServletResponse?, chain: FilterChain?) {
 
         // 1. Request Header 에서 JWT 토큰 추출
         val token = resolveToken(request as HttpServletRequest)
@@ -24,10 +24,10 @@ class JwtAuthFilter(
         // 2. validateToken 으로 토큰 유효성 검사
         if (token != null && jwtTokenProvider.validateToken(token)) {
             // 토큰이 유효할 경우 토큰에서 Authentication 객체를 가지고 와서 SecurityContext 에 저장
-            val authentication: Authentication? = jwtTokenProvider.getAuthentication(token)
+            val authentication = jwtTokenProvider.getAuthentication(token)
             SecurityContextHolder.getContext().authentication = authentication
         }
-        chain.doFilter(request, response)
+        chain?.doFilter(request, response)
     }
 
     // Request Header 에서 토큰 정보 추출
