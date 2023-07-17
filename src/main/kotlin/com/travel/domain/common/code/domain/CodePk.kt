@@ -1,4 +1,4 @@
-package com.travel.global.code.domain
+package com.travel.domain.common.code.domain
 
 import java.io.Serializable
 
