@@ -1,5 +1,6 @@
 package com.travel.global.config.sercurity
 
+import com.travel.domain.member.dto.CustomUser
 import com.travel.global.util.LogSupport
 import io.jsonwebtoken.*
 import io.jsonwebtoken.io.Decoders
@@ -36,6 +37,7 @@ class JwtTokenProvider {
         val accessToken: String = Jwts.builder()
                 .setSubject(authentication.name)
                 .claim("auth", authorities)
+                .claim("userId", (authentication.principal as CustomUser).userId)
                 .setIssuedAt(now)
                 .setExpiration(accessTokenExpiresIn)
                 .signWith(key, SignatureAlgorithm.HS256)
@@ -58,10 +60,11 @@ class JwtTokenProvider {
         // 토큰 복호화
         val claims: Claims = parseClaims(accessToken)
         val auth = claims["auth"] ?: throw RuntimeException("잘못된 토큰입니다.")
+        val userId = claims["userId"] ?: throw RuntimeException("잘못된 토큰입니다.")
 
         // 권한정보 추출
         val authorities: Collection<GrantedAuthority> = (auth as String).split(",").map{SimpleGrantedAuthority(it)}
-        val principal: UserDetails =  User(claims.subject, "", authorities)
+        val principal: UserDetails =  CustomUser(userId.toString().toLong(), claims.subject, "", authorities)
 
         return UsernamePasswordAuthenticationToken(principal, "", authorities)
     }

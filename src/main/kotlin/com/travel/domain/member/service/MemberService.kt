@@ -4,9 +4,11 @@ import com.travel.domain.member.domain.Member
 import com.travel.domain.member.domain.MemberRepository
 import com.travel.domain.member.domain.MemberRole
 import com.travel.domain.member.domain.MemberRoleRepository
+import com.travel.domain.member.dto.MemberResponseDto
 import com.travel.domain.member.dto.MemberSaveDto
 import com.travel.global.enum.MemberRoles
 import com.travel.global.exception.InvalidInputException
+import org.springframework.data.repository.findByIdOrNull
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 
@@ -28,6 +30,11 @@ class MemberService(
         memberRoleRepository.save(MemberRole(null, MemberRoles.USER, member))
 
         return member;
+    }
+
+    fun get(id: Long): MemberResponseDto {
+        val member: Member = memberRepository.findByIdOrNull(id) ?: throw InvalidInputException("id", "회원번호(${id})가 존재하지 않는 유저입니다.")
+        return member.toDto()
     }
 }
 
