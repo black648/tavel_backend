@@ -20,7 +20,7 @@ class Member(
         @Column(nullable = false, length = 30)
         val email: String,
 
-        @Column(nullable = false, length = 50)
+        @Column(nullable = false, length = 200)
         val password: String
 ): BaseEntity() {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "member")

@@ -1,7 +1,8 @@
-package com.travel.domain.travel.service
+package com.travel.domain.travel
 
 import com.travel.domain.travel.domain.city.TravelCityRepository
 import com.travel.domain.travel.dto.city.TravelCityDto
+import com.travel.domain.travel.service.TravelCityService
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.DisplayName

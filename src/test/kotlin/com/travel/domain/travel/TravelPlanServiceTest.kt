@@ -1,7 +1,9 @@
-package com.travel.domain.travel.service
+package com.travel.domain.travel
 
 import com.travel.domain.travel.domain.plan.TravelPlanRepository
 import com.travel.domain.travel.dto.plan.TravelPlanSaveDto
+import com.travel.domain.travel.service.TravelPlanService
+import com.travel.domain.travel.service.TravelService
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -10,9 +12,9 @@ import org.springframework.boot.test.context.SpringBootTest
 
 @SpringBootTest
 class TravelPlanServiceTest @Autowired constructor(
-      private var travelService: TravelService,
-      private var travelPlanService: TravelPlanService,
-      private var travelPlanRepository: TravelPlanRepository
+    private var travelService: TravelService,
+    private var travelPlanService: TravelPlanService,
+    private var travelPlanRepository: TravelPlanRepository
 ) {
     @DisplayName("[단위테스트] 여행계획 등록")
     @Test

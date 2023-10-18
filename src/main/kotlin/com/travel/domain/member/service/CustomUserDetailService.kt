@@ -3,6 +3,7 @@ package com.travel.domain.member.service
 import com.travel.domain.member.domain.Member
 import com.travel.domain.member.domain.MemberRepository
 import com.travel.domain.member.dto.CustomUser
+import com.travel.global.exception.InvalidInputException
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
@@ -16,6 +17,7 @@ class CustomUserDetailService(
 ) : UserDetailsService {
     override fun loadUserByUsername(username: String): UserDetails =
         memberRepository.findByEmail(username)
+            .orElseThrow{ InvalidInputException("해당 유저를 찾을 수 없습니다.") }
             ?.let { createUserDetails(it) }
             ?: throw Exception("해당 유저를 찾을 수 없습니다.")
 

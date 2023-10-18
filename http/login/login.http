@@ -6,4 +6,4 @@ Content-Type: application/json
   "password" : "1111"
 }
 
-> {% client.global.set("X-AUTH-TOKEN", response.body.object.resultData.tokenKey); %}
+> {% client.global.set("Authorization", response.body.object.resultData.tokenKey); %}

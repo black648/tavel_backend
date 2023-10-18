@@ -1,8 +1,9 @@
-package com.travel.domain.travel.service
+package com.travel.domain.travel
 
 import com.travel.domain.travel.domain.Travel
 import com.travel.domain.travel.domain.TravelRepository
 import com.travel.domain.travel.dto.*
+import com.travel.domain.travel.service.TravelService
 import org.assertj.core.api.Assertions
 import org.assertj.core.api.AssertionsForInterfaceTypes.assertThat
 import org.junit.jupiter.api.AfterEach
@@ -13,8 +14,8 @@ import org.springframework.boot.test.context.SpringBootTest
 
 @SpringBootTest
 class TravelServiceTest @Autowired constructor(
-        private var travelService: TravelService,
-        private var travelRepository: TravelRepository,
+    private var travelService: TravelService,
+    private var travelRepository: TravelRepository,
 ) {
     @AfterEach
     fun clean() {

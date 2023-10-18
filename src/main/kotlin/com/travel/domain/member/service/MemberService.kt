@@ -11,6 +11,7 @@ import com.travel.global.exception.InvalidInputException
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
+import java.util.*
 
 @Service
 class MemberService(
@@ -20,13 +21,11 @@ class MemberService(
 ) {
     fun save(saveDto: MemberSaveDto): Member {
         // email 중복검사
-        var member: Member? = memberRepository.findByEmail(saveDto.email)
-        if(member != null) {
-            throw InvalidInputException("이미 등록된 이메일 입니다.")
-        }
+        memberRepository.findByEmail(saveDto.email)
+            .ifPresent{ InvalidInputException("이미 등록된 이메일 입니다.") };
 
         saveDto.password = passwordEncoder.encode(saveDto.password);
-        member = memberRepository.save(saveDto.toEntity());
+        var member = memberRepository.save(saveDto.toEntity());
         memberRoleRepository.save(MemberRole(null, MemberRoles.USER, member))
 
         return member;
