@@ -15,9 +15,11 @@ class LoginController(
 ) {
     @PostMapping("/join")
     fun save(@RequestBody dto: MemberSaveDto): BaseResponse<TokenInfo> {
+        val orgPassword: String =  dto.password;
         val message: String = loginService.doJoin(dto)
         return BaseResponse(
-            data = loginService.login(LoginDto(_email = dto.email, _password = dto.password)),
+//            data = loginService.login(LoginDto(_email = dto.email, _password = orgPassword)),
+            data = null,
             message = message
         )
     }
