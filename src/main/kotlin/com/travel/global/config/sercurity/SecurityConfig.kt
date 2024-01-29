@@ -24,7 +24,8 @@ class SecurityConfig(
             .csrf { it.disable() }
             .sessionManagement{ it.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
             .authorizeHttpRequests {
-                it.requestMatchers("/login/**", "/join/**", "/error/**").permitAll()
+                it.requestMatchers("/login/**", "/join/**", "/error/**", "/swagger-ui/**","/swagger-resources/**",
+                    "/v3/api-docs/**").permitAll()
                     .requestMatchers("/admin/**").hasRole("ADMIN")
                     .requestMatchers("/").hasRole("USER")
                     .anyRequest().authenticated() }
