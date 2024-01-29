@@ -18,8 +18,8 @@ class CodeGroup(
         val codeList: List<Code> = mutableListOf(),
 
     @Id
-        @Column(name = "groupCd")
-        val groupCd: String
+    @Column(name = "groupCd")
+    val groupCd: String
 ) {
 
 }
